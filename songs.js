@@ -418,5 +418,117 @@ On se retrouvera lala lala , lala lala
 E7                     C         G         Am
 Entre nous c'est comme ça lala lala lala lala
 `
+},
+{
+  id: 'seed-je-t-aimais',
+  title: "Je t'aimais, je t'aime, je t'aimerai",
+  artist: 'Francis Cabrel',
+  note: 'Accordage standard',
+  body: `[Intro]
+G     D G  x2
+
+
+[Verse 1]
+                               G
+Mon enfant, nu sur les galets,
+                                  D
+Le vent dans tes cheveux défaits,
+                                  C
+Comme un printemps sur mon trajet,
+                               Emadd9 Em
+Un diamant tombé d'un coffret.
+                          G
+Seule la lumière pourrait
+                            D
+Defaire nos repères secrets
+                                     C
+Ou mes doigts pris sur tes poignets,
+                                         Emadd9 Em
+Je t'aimais, je t'aime et je t'aimerai...
+
+
+[Chorus]
+C                     Am                          D
+   Quoi que tu fasses,  l'amour est partout où tu regardes
+                               C
+Dans les moindres recoins de l'espace,
+Am                              D
+   Dans le moindre rêve où tu t'attardes
+                                C
+L'amour, comme s'il en pleuvait,
+                    Emadd9 Em
+Nu sur les galets...
+
+
+[Verse 2]
+                                 G
+Le ciel prétend qu'il te connait
+                                 D
+Il est si beau c'est surement vrai.
+                          C
+Lui qui s'approche jamais -
+                                Emadd9 Em
+Je l'ai vu pris dans tes filets.
+                                G
+Le monde a tellement de regrets
+                                 D
+Tellement de choses qu'on promet.
+                                    C
+Une seule pour laquelle je suis fait -
+                                        Emadd9  Em
+Je t'aimais, je t'aime et je t'aimerai...
+
+Emadd9  Em
+
+
+[Chorus]
+C                     Am                          D
+   Quoi que tu fasses,  l'amour est partout où tu regardes
+                                      C
+Dans les moindres recoins de l'espace,
+Am                              D
+   Dans le moindre rêve où tu t'attardes
+                                C
+L'amour, comme s'il en pleuvait,
+                    Emadd9 Em
+Nu sur les galets...
+
+Emadd9 Em
+
+| G | G | D | D |
+| C | C | Emadd9 Em |
+
+
+[Verse 3]
+Emadd9           Em      | G
+On s'envolera du même quai
+                                 D
+Les yeux, dans les mêmes reflets,
+                                 C
+Pour cette vie et celle d'après
+                                 Emadd9 Em
+Tu seras mon unique projet.
+                                 G
+Je m'en irai poser tes portraits
+                                        D
+A tous les plafonds de tous les palais,
+                                    C
+Sur tous les murs que je trouverai
+                                 Emadd9 Em
+Et juste en-dessous j'ecrirai
+                                G
+Que seule la lumière pourrait...
+
+| G | D |
+
+D                                       C
+   Et mes doigts pris sur tes poignets,
+                                        Emadd9 Em
+Je t'aimais, je t'aime et je t'aimerai....
+
+
+[Outro fade-out]
+| G | G | D | D |
+`
 }
 ];
