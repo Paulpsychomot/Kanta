@@ -62,6 +62,10 @@ button{background:none;border:0;padding:0;cursor:pointer}
 
 /* chanson */
 .meta{padding:10px calc(var(--sar) + 14px) 0 calc(var(--sal) + 14px);color:var(--muted);font-size:15px}
+.tr{display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:6px calc(var(--sar) + 10px) 0 calc(var(--sal) + 14px)}
+.tr .ib{background:var(--panel);border:1px solid var(--line);min-width:40px;height:38px}
+.tr b{min-width:30px;text-align:center;font-variant-numeric:tabular-nums}
+.tr .lbl{margin-right:4px}
 .tab{margin:0;padding:12px calc(var(--sar) + 14px) calc(var(--sab) + 140px) calc(var(--sal) + 14px);
   font:var(--fs,14px)/1.35 ui-monospace,"SF Mono",Menlo,monospace;white-space:pre;overflow-x:auto;
   -webkit-overflow-scrolling:touch;tab-size:4}
@@ -113,6 +117,14 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     <button class="ib" id="s-edit">Éditer</button>
   </div>
   <div class="meta" id="s-meta"></div>
+  <div class="tr" id="s-tr">
+    <span class="lbl">Tonalité</span>
+    <button class="ib" id="t-minus" aria-label="Un demi-ton plus bas">−</button>
+    <b id="t-val">0</b>
+    <button class="ib" id="t-plus" aria-label="Un demi-ton plus haut">+</button>
+    <button class="ib" id="t-capo" style="display:none"></button>
+    <button class="ib" id="t-reset" style="display:none">Original</button>
+  </div>
   <pre class="tab" id="s-tab"></pre>
   <div class="tools">
     <div class="grp">
@@ -236,11 +248,69 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     current = s; show('song');
     $('s-title').textContent = s.title || 'Sans titre';
     $('s-meta').textContent = [s.artist, s.note].filter(Boolean).join(' · ');
-    $('s-tab').textContent = s.body || '';
+    const cp = capoOf(s);
+    $('t-capo').style.display = cp ? '' : 'none';
+    if (cp) $('t-capo').textContent = 'Sans capo (+' + cp + ')';
+    renderTab();
     $('s-tab').style.setProperty('--fs', prefs.fs + 'px');
     $('sc-speed').value = prefs.speed;
     window.scrollTo(0, 0);
   }
+  /* ---------- transposition des accords ---------- */
+  const SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  const FLAT  = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+  const IDX = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+  const CHORD = /^([A-G][#b]?)((?:maj|min|m|M|dim|aug|sus|add|\+|°|ø|-)?\d*(?:sus\d|add\d+|b\d|#\d)*)(?:\/([A-G][#b]?))?$/;
+  const noteIdx = n => (IDX[n[0]] + (n[1] === '#' ? 1 : n[1] === 'b' ? -1 : 0) + 12) % 12;
+  function shiftChord(tok, st) {
+    const m = CHORD.exec(tok); if (!m) return tok;
+    const flat = m[1][1] === 'b' || (m[3] && m[3][1] === 'b');
+    const name = n => (flat ? FLAT : SHARP)[(noteIdx(n) + st + 120) % 12];
+    return name(m[1]) + m[2] + (m[3] ? '/' + name(m[3]) : '');
+  }
+  const isChordTok = t => CHORD.test(t) || /^x\d+$/i.test(t) || /^[|\/\-–]+$/.test(t);
+  function isChordLine(l) {
+    const t = l.trim().split(/\s+/);
+    return t[0] !== '' && !/^\[/.test(l.trim()) && t.every(isChordTok) && t.some(x => CHORD.test(x));
+  }
+  function shiftLine(l, st) {
+    const toks = [...l.matchAll(/\S+/g)];
+    let out = l.slice(0, toks[0].index);
+    toks.forEach((m, i) => {
+      out += CHORD.test(m[0]) ? shiftChord(m[0], st) : m[0];
+      const next = toks[i + 1];
+      if (next) out += ' '.repeat(Math.max(1, next.index - out.length));
+    });
+    return out;
+  }
+  function transpose(body, st) {
+    if (!st) return body;
+    return body.split('\n').map(l => isChordLine(l) ? shiftLine(l, st) : l).join('\n');
+  }
+  const ROMAN = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8, IX: 9, X: 10 };
+  function capoOf(s) {
+    const m = /capo\s*:?\s*(\d+|[IVX]+)\b/i.exec(s.note || '');
+    if (!m) return 0;
+    return /^\d+$/.test(m[1]) ? +m[1] : (ROMAN[m[1].toUpperCase()] || 0);
+  }
+  const trOf = s => ((prefs.tr || {})[s.id] || 0);
+  function setTr(v) {
+    v = ((v + 6 + 120) % 12) - 6;               // reste entre −6 et +5
+    prefs.tr = prefs.tr || {};
+    if (v) prefs.tr[current.id] = v; else delete prefs.tr[current.id];
+    savePrefs(); renderTab();
+  }
+  function renderTab() {
+    const st = trOf(current);
+    $('s-tab').textContent = transpose(current.body || '', st);
+    $('t-val').textContent = (st > 0 ? '+' : '') + st;
+    $('t-reset').style.display = st ? '' : 'none';
+  }
+  $('t-minus').onclick = () => setTr(trOf(current) - 1);
+  $('t-plus').onclick = () => setTr(trOf(current) + 1);
+  $('t-capo').onclick = () => setTr(capoOf(current));
+  $('t-reset').onclick = () => setTr(0);
+
   $('s-back').onclick = () => go('#');
   $('s-edit').onclick = () => go('#edit/' + current.id);
   const setFs = d => { prefs.fs = Math.min(30, Math.max(9, prefs.fs + d)); $('s-tab').style.setProperty('--fs', prefs.fs + 'px'); savePrefs(); };
