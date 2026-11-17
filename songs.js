@@ -1132,5 +1132,71 @@ E  A         E         A
 E  A  E  A
 E
 `
+},
+{
+  id: 'seed-oihanian',
+  title: 'Oihanian',
+  artist: 'Botakantu',
+  note: 'Accords : F# D A E',
+  body: `Accords : F# D A E
+(placement sur les paroles à compléter)
+
+F#  D  A  E
+
+Oihanian zuiñen eijer
+Txorriñobat Khantari
+Eskualdün arbolari
+Zazpi probintzier
+
+Amodioz dio gazter
+Eskuarari bethi exker
+Jarraikiz aiten ürratxer
+Ez sekülan bazter
+
+Ez deia Xarmagarri
+Nuri ez dü plazer
+Txori bat khantan ari
+Eskualdün aurhider
+
+Ez deia Xarmagarri
+Nuri ez dü plazer
+Txori bat khantan ari
+Eskualdün aurhider
+
+Hots anaie maitiak
+Bandera eskietan
+Eskualdünak beikira
+Nagusi güzietan
+
+Hots anaie maitiak
+Bandera eskietan
+Eskualdünak beikira
+Nagusi güzietan
+
+O Txoria Hanitxetan
+Zurekilan batian
+Boztarioz Khantatzia
+Nian desiretan
+
+Sarthü gira plazeretan
+Egün plaza eder huntan
+Nahiz boztario ezari
+Eskual bihotzetan
+
+Hots anaie maitiak
+Bandera eskietan
+Eskualdünak beikira
+Nagusi güzietan
+
+Hots anaie maitiak
+Bandera eskietan
+Eskualdünak beikira
+Nagusi güzietan
+
+Hots anaie maitiak
+Bandera eskietan
+Eskualdünak beikira
+Nagusi güzietan
+`
 }
 ];
