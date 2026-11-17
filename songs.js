@@ -1,5 +1,6 @@
 // Tablatures fournies avec l'appli. Chaque chanson a un id fixe :
 // elle n'est ajoutée qu'une fois (si tu la supprimes, elle ne revient pas).
+// Si 'rev' augmente, la version de l'appareil est mise à jour.
 window.SEED = [
 {
   id: 'seed-eperra',
@@ -335,7 +336,8 @@ Oh, stand now,   oh, stand, stand by me
   id: 'seed-les-bons-vivants',
   title: 'Les bons vivants',
   artist: 'Tibz',
-  note: 'Accordage standard · sans capo',
+  note: 'Capo 3',
+  rev: 2,
   body: `[Verse 1]
 Am               G                       C
 J'ai une bande d'amis qui aime chanter à table

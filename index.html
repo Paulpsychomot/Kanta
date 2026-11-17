@@ -186,9 +186,13 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   prefs.seeded = prefs.seeded || [];
   let added = false;
   for (const x of (window.SEED || [])) {
-    if (prefs.seeded.includes(x.id)) continue;
+    const have = songs.find(s => s.id === x.id);
+    if (prefs.seeded.includes(x.id)) {
+      if (have && (x.rev || 0) > (have.rev || 0)) { Object.assign(have, x); added = true; }
+      continue;
+    }
     prefs.seeded.push(x.id); added = true;
-    if (!songs.some(s => s.id === x.id)) songs.push({ ...x });
+    if (!have) songs.push({ ...x });
   }
   if (added) { save(); savePrefs(); }
 
