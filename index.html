@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14110f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tablatures">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<title>Mes tablatures</title>
+<style>
+:root{
+  --bg:#14110f; --panel:#1f1a17; --line:#352e29; --text:#f3ece4; --muted:#a39688;
+  --accent:#f0a23b; --accent-ink:#1a1206; --danger:#e5645a;
+  --sat:env(safe-area-inset-top); --sab:env(safe-area-inset-bottom);
+  --sal:env(safe-area-inset-left); --sar:env(safe-area-inset-right);
+}
+@media (prefers-color-scheme: light){
+  :root.auto{ --bg:#faf6f0; --panel:#fff; --line:#e4dccf; --text:#2a221b; --muted:#7a6d5f; --accent:#c9720c; --accent-ink:#fff; }
+}
+:root.light{ --bg:#faf6f0; --panel:#fff; --line:#e4dccf; --text:#2a221b; --muted:#7a6d5f; --accent:#c9720c; --accent-ink:#fff; }
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:17px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+  -webkit-text-size-adjust:100%}
+button,input,textarea{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer}
+.view{display:none;min-height:100dvh}
+.view.on{display:block}
+
+/* barres */
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:8px;
+  padding:calc(var(--sat) + 8px) calc(var(--sar) + 12px) 8px calc(var(--sal) + 12px);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+.bar h1{font-size:20px;margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ib{min-width:44px;height:44px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:600;color:var(--accent);padding:0 10px;gap:4px}
+.ib:active{background:var(--panel)}
+.ib.fill{background:var(--accent);color:var(--accent-ink)}
+.ib.danger{color:var(--danger)}
+
+/* liste */
+.search{padding:10px calc(var(--sar) + 12px) 4px calc(var(--sal) + 12px)}
+.search input{width:100%;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);padding:0 14px;outline:none}
+.search input:focus{border-color:var(--accent)}
+.list{list-style:none;margin:0;padding:6px calc(var(--sar) + 12px) calc(var(--sab) + 90px) calc(var(--sal) + 12px)}
+.list li{margin:8px 0}
+.list a{display:block;padding:14px 16px;border-radius:14px;background:var(--panel);border:1px solid var(--line);color:inherit;text-decoration:none}
+.list a:active{border-color:var(--accent)}
+.list .t{font-weight:650;font-size:18px}
+.list .a{color:var(--muted);font-size:15px;margin-top:2px}
+.empty{color:var(--muted);text-align:center;padding:48px 24px}
+.fab{position:fixed;right:calc(var(--sar) + 18px);bottom:calc(var(--sab) + 18px);height:56px;padding:0 22px;border-radius:28px;
+  background:var(--accent);color:var(--accent-ink);font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.offline{display:none;margin:8px calc(var(--sar) + 12px) 0 calc(var(--sal) + 12px);padding:8px 12px;border-radius:10px;
+  background:var(--panel);border:1px solid var(--line);color:var(--muted);font-size:14px}
+
+/* chanson */
+.meta{padding:10px calc(var(--sar) + 14px) 0 calc(var(--sal) + 14px);color:var(--muted);font-size:15px}
+.tab{margin:0;padding:12px calc(var(--sar) + 14px) calc(var(--sab) + 140px) calc(var(--sal) + 14px);
+  font:var(--fs,14px)/1.35 ui-monospace,"SF Mono",Menlo,monospace;white-space:pre;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;tab-size:4}
+.tools{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;align-items:center;gap:6px;justify-content:space-between;
+  padding:8px calc(var(--sar) + 10px) calc(var(--sab) + 8px) calc(var(--sal) + 10px);
+  background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line)}
+.grp{display:flex;align-items:center;gap:4px}
+.tools .ib{background:var(--panel);border:1px solid var(--line)}
+.tools .ib.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tools input[type=range]{width:90px;accent-color:var(--accent)}
+.lbl{font-size:12px;color:var(--muted)}
+
+/* édition */
+.form{padding:14px calc(var(--sar) + 14px) calc(var(--sab) + 30px) calc(var(--sal) + 14px);display:grid;gap:12px}
+.form label{display:grid;gap:6px;color:var(--muted);font-size:14px}
+.form input,.form textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:12px 14px;outline:none;font-size:17px}
+.form input:focus,.form textarea:focus{border-color:var(--accent)}
+.form textarea{min-height:52dvh;font:14px/1.35 ui-monospace,"SF Mono",Menlo,monospace;white-space:pre;overflow-x:auto;resize:vertical}
+.hint{font-size:13px;color:var(--muted)}
+
+/* menu */
+dialog{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:18px;padding:8px;width:min(92vw,360px)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+dialog button{display:block;width:100%;text-align:left;padding:14px;border-radius:12px;font-size:17px}
+dialog button:active{background:var(--bg)}
+dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13px}
+</style>
+</head>
+<body>
+
+<!-- LISTE -->
+<section id="v-list" class="view">
+  <div class="bar">
+    <h1>🎸 Mes tablatures</h1>
+    <button class="ib" id="btn-menu" aria-label="Menu">•••</button>
+  </div>
+  <div class="offline" id="offline">Hors ligne — tes tablatures restent disponibles.</div>
+  <div class="search"><input id="q" type="search" placeholder="Rechercher un titre ou un artiste" autocomplete="off" autocapitalize="off"></div>
+  <ul class="list" id="list"></ul>
+  <button class="fab" id="btn-new">+ Ajouter</button>
+</section>
+
+<!-- CHANSON -->
+<section id="v-song" class="view">
+  <div class="bar">
+    <button class="ib" id="s-back">‹ Liste</button>
+    <h1 id="s-title"></h1>
+    <button class="ib" id="s-edit">Éditer</button>
+  </div>
+  <div class="meta" id="s-meta"></div>
+  <pre class="tab" id="s-tab"></pre>
+  <div class="tools">
+    <div class="grp">
+      <button class="ib" id="f-minus" aria-label="Texte plus petit">A−</button>
+      <button class="ib" id="f-plus" aria-label="Texte plus grand">A+</button>
+    </div>
+    <div class="grp">
+      <button class="ib" id="sc-toggle">▶ Défiler</button>
+      <input type="range" id="sc-speed" min="1" max="10" value="3" aria-label="Vitesse de défilement">
+    </div>
+  </div>
+</section>
+
+<!-- ÉDITION -->
+<section id="v-edit" class="view">
+  <div class="bar">
+    <button class="ib" id="e-cancel">Annuler</button>
+    <h1 id="e-head">Nouvelle tablature</h1>
+    <button class="ib fill" id="e-save">Enregistrer</button>
+  </div>
+  <div class="form">
+    <label>Titre<input id="e-title" autocomplete="off" placeholder="Wonderwall"></label>
+    <label>Artiste<input id="e-artist" autocomplete="off" placeholder="Oasis"></label>
+    <label>Note (capo, accordage…)<input id="e-note" autocomplete="off" placeholder="Capo 2"></label>
+    <label>Tablature / accords
+      <textarea id="e-body" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off"
+        placeholder="Colle ici ta tablature (texte brut)…"></textarea>
+    </label>
+    <div class="hint">Astuce : copie la tab depuis un site et colle-la ici. Les espaces sont conservés pour que les colonnes restent alignées.</div>
+    <button class="ib danger" id="e-del" style="display:none">Supprimer cette tablature</button>
+  </div>
+</section>
+
+<dialog id="menu">
+  <button id="m-export">Sauvegarder (exporter)</button>
+  <button id="m-import">Restaurer (importer)</button>
+  <button id="m-theme">Changer le thème</button>
+  <small id="m-info"></small>
+  <button id="m-close">Fermer</button>
+</dialog>
+<input type="file" id="file" accept="application/json,.json" hidden>
+
+<script src="songs.js"></script>
+<script>
+(() => {
+  const KEY = 'tabs.v1', PREF = 'tabs.prefs.v1';
+  const $ = id => document.getElementById(id);
+
+  /* ---------- stockage ---------- */
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  const load = () => { try { const d = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(d)) return d; } catch (e) {} return null; };
+  let songs = load() || [];
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(songs)); } catch (e) { alert("Impossible d'enregistrer (stockage plein ?)"); } }
+  let prefs = { fs: 14, speed: 3, theme: 'auto' };
+  try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF)) || {}); } catch (e) {}
+  const savePrefs = () => { try { localStorage.setItem(PREF, JSON.stringify(prefs)); } catch (e) {} };
+
+  // Chansons fournies (songs.js) : ajoutées une seule fois chacune
+  prefs.seeded = prefs.seeded || [];
+  let added = false;
+  for (const x of (window.SEED || [])) {
+    if (prefs.seeded.includes(x.id)) continue;
+    prefs.seeded.push(x.id); added = true;
+    if (!songs.some(s => s.id === x.id)) songs.push({ ...x });
+  }
+  if (added) { save(); savePrefs(); }
+
+  /* ---------- thème ---------- */
+  function applyTheme() {
+    const r = document.documentElement;
+    r.classList.toggle('auto', prefs.theme === 'auto');
+    r.classList.toggle('light', prefs.theme === 'light');
+    $('m-theme').textContent = 'Thème : ' + ({ auto: 'automatique', dark: 'sombre', light: 'clair' })[prefs.theme];
+  }
+
+  /* ---------- navigation ---------- */
+  const views = ['list', 'song', 'edit'];
+  function show(v) { views.forEach(n => $('v-' + n).classList.toggle('on', n === v)); }
+  const find = id => songs.find(s => s.id === id);
+  let current = null;
+
+  function route() {
+    stopScroll();
+    const h = location.hash.slice(1);
+    const [name, id] = h.split('/');
+    if (name === 'song' && find(id)) return openSong(find(id));
+    if (name === 'edit') return openEdit(id ? find(id) : null);
+    show('list'); renderList(); window.scrollTo(0, listScroll);
+  }
+  let listScroll = 0;
+  window.addEventListener('hashchange', route);
+  const go = h => { if (location.hash === h) route(); else location.hash = h; };
+
+  /* ---------- liste ---------- */
+  const norm = s => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  function renderList() {
+    const q = norm($('q').value.trim());
+    const items = songs.filter(s => !q || norm(s.title + ' ' + s.artist).includes(q))
+      .sort((a, b) => norm(a.title).localeCompare(norm(b.title)));
+    const ul = $('list'); ul.textContent = '';
+    if (!items.length) {
+      const d = document.createElement('div'); d.className = 'empty';
+      d.textContent = songs.length ? 'Aucun résultat.' : 'Aucune tablature. Appuie sur « + Ajouter ».';
+      ul.appendChild(d); return;
+    }
+    for (const s of items) {
+      const li = document.createElement('li'), a = document.createElement('a');
+      a.href = '#song/' + s.id;
+      a.innerHTML = '<div class="t"></div><div class="a"></div>';
+      a.children[0].textContent = s.title || 'Sans titre';
+      a.children[1].textContent = [s.artist, s.note].filter(Boolean).join(' · ');
+      a.addEventListener('click', () => { listScroll = window.scrollY; });
+      li.appendChild(a); ul.appendChild(li);
+    }
+  }
+  $('q').addEventListener('input', renderList);
+  $('btn-new').onclick = () => go('#edit');
+
+  /* ---------- chanson ---------- */
+  function openSong(s) {
+    current = s; show('song');
+    $('s-title').textContent = s.title || 'Sans titre';
+    $('s-meta').textContent = [s.artist, s.note].filter(Boolean).join(' · ');
+    $('s-tab').textContent = s.body || '';
+    $('s-tab').style.setProperty('--fs', prefs.fs + 'px');
+    $('sc-speed').value = prefs.speed;
+    window.scrollTo(0, 0);
+  }
+  $('s-back').onclick = () => go('#');
+  $('s-edit').onclick = () => go('#edit/' + current.id);
+  const setFs = d => { prefs.fs = Math.min(30, Math.max(9, prefs.fs + d)); $('s-tab').style.setProperty('--fs', prefs.fs + 'px'); savePrefs(); };
+  $('f-minus').onclick = () => setFs(-1);
+  $('f-plus').onclick = () => setFs(1);
+
+  /* défilement automatique + écran allumé */
+  let raf = 0, acc = 0, last = 0, lock = null;
+  async function wake(on) {
+    try {
+      if (on && 'wakeLock' in navigator) lock = await navigator.wakeLock.request('screen');
+      else if (lock) { await lock.release(); lock = null; }
+    } catch (e) {}
+  }
+  function tick(t) {
+    const dt = Math.min(64, t - last); last = t;
+    acc += prefs.speed * 6 * dt / 1000;               // px par seconde
+    const px = Math.floor(acc); acc -= px;
+    if (px) window.scrollBy(0, px);
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) return stopScroll();
+    raf = requestAnimationFrame(tick);
+  }
+  function startScroll() { $('sc-toggle').classList.add('on'); $('sc-toggle').textContent = '❚❚ Pause'; last = performance.now(); acc = 0; raf = requestAnimationFrame(tick); wake(true); }
+  function stopScroll() { cancelAnimationFrame(raf); raf = 0; $('sc-toggle').classList.remove('on'); $('sc-toggle').textContent = '▶ Défiler'; wake(false); }
+  $('sc-toggle').onclick = () => raf ? stopScroll() : startScroll();
+  $('sc-speed').oninput = e => { prefs.speed = +e.target.value; savePrefs(); };
+  // un toucher sur la tab met le défilement en pause
+  $('s-tab').addEventListener('touchstart', () => { if (raf) stopScroll(); }, { passive: true });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopScroll(); });
+
+  /* ---------- édition ---------- */
+  let editing = null;
+  function openEdit(s) {
+    editing = s; show('edit');
+    $('e-head').textContent = s ? 'Modifier' : 'Nouvelle tablature';
+    $('e-title').value = s ? s.title : '';
+    $('e-artist').value = s ? s.artist : '';
+    $('e-note').value = s ? s.note : '';
+    $('e-body').value = s ? s.body : '';
+    $('e-del').style.display = s ? '' : 'none';
+    window.scrollTo(0, 0);
+  }
+  $('e-cancel').onclick = () => history.length > 1 ? history.back() : go('#');
+  $('e-save').onclick = () => {
+    const title = $('e-title').value.trim();
+    if (!title) { $('e-title').focus(); return; }
+    const data = { title, artist: $('e-artist').value.trim(), note: $('e-note').value.trim(), body: $('e-body').value.replace(/\r\n?/g, '\n') };
+    if (editing) Object.assign(editing, data); else { editing = { id: uid(), ...data }; songs.push(editing); }
+    save(); location.replace('#song/' + editing.id);
+  };
+  $('e-del').onclick = () => {
+    if (!confirm('Supprimer « ' + editing.title + ' » ? Cette action est définitive.')) return;
+    songs = songs.filter(s => s !== editing); save(); location.replace('#');
+  };
+
+  /* ---------- menu : sauvegarde / thème ---------- */
+  const menu = $('menu');
+  $('btn-menu').onclick = () => { $('m-info').textContent = songs.length + ' tablature(s) enregistrée(s) sur cet appareil.'; menu.showModal(); };
+  $('m-close').onclick = () => menu.close();
+  $('m-theme').onclick = () => { prefs.theme = ({ auto: 'dark', dark: 'light', light: 'auto' })[prefs.theme]; savePrefs(); applyTheme(); };
+  $('m-export').onclick = async () => {
+    const blob = new Blob([JSON.stringify(songs, null, 2)], { type: 'application/json' });
+    const file = new File([blob], 'tablatures.json', { type: 'application/json' });
+    try {
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'Mes tablatures' }); menu.close(); return; }
+    } catch (e) { if (e.name === 'AbortError') return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tablatures.json'; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000); menu.close();
+  };
+  $('m-import').onclick = () => $('file').click();
+  $('file').onchange = async e => {
+    const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try {
+      const d = JSON.parse(await f.text());
+      if (!Array.isArray(d)) throw 0;
+      let n = 0;
+      for (const x of d) {
+        if (!x || typeof x.body !== 'string') continue;
+        const ex = songs.find(s => s.id === x.id);
+        const rec = { id: x.id || uid(), title: String(x.title || 'Sans titre'), artist: String(x.artist || ''), note: String(x.note || ''), body: x.body };
+        if (ex) Object.assign(ex, rec); else songs.push(rec); n++;
+      }
+      save(); menu.close(); renderList(); alert(n + ' tablature(s) importée(s).');
+    } catch (err) { alert("Fichier invalide."); }
+  };
+
+  /* ---------- hors ligne ---------- */
+  const syncNet = () => { $('offline').style.display = navigator.onLine ? 'none' : 'block'; };
+  addEventListener('online', syncNet); addEventListener('offline', syncNet); syncNet();
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+
+  applyTheme(); route();
+})();
+</script>
+</body>
+</html>
