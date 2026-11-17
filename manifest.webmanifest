@@ -1,6 +1,6 @@
 {
-  "name": "Mes tablatures",
-  "short_name": "Tablatures",
+  "name": "Kanta",
+  "short_name": "Kanta",
   "description": "Mes tablatures de guitare, consultables hors ligne",
   "start_url": "./index.html",
   "scope": "./",

@@ -7,11 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Tablatures">
+<meta name="apple-mobile-web-app-title" content="Kanta">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-180.png">
-<title>Mes tablatures</title>
+<title>Kanta</title>
 <style>
 :root{
   --bg:#14110f; --panel:#1f1a17; --line:#352e29; --text:#f3ece4; --muted:#a39688;
@@ -96,7 +96,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
 <!-- LISTE -->
 <section id="v-list" class="view">
   <div class="bar">
-    <h1>🎸 Mes tablatures</h1>
+    <h1>🎸 Kanta</h1>
     <button class="ib" id="btn-menu" aria-label="Menu">•••</button>
   </div>
   <div class="offline" id="offline">Hors ligne — tes tablatures restent disponibles.</div>
@@ -305,7 +305,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     const blob = new Blob([JSON.stringify(songs, null, 2)], { type: 'application/json' });
     const file = new File([blob], 'tablatures.json', { type: 'application/json' });
     try {
-      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'Mes tablatures' }); menu.close(); return; }
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'Kanta' }); menu.close(); return; }
     } catch (e) { if (e.name === 'AbortError') return; }
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tablatures.json'; a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 5000); menu.close();
