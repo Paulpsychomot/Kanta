@@ -826,5 +826,74 @@ La la la la la li la la la...
   F            E7       Am
 La la la la la li la la la…
 `
+},
+{
+  id: 'seed-amor-daussau',
+  title: "Amor d'Aussau",
+  artist: 'A Vista de Nas',
+  note: 'Accordage standard',
+  body: `C   G                C
+Oei que soi jo, embarrat hens l'ostau,
+Dm        C     Dm           G
+Dab lo flaquer, lheu ua malaudia,
+           E                         Am
+Lo mei qui poish qu'ei d'anar tau portau
+F           C        G         C
+Alavetz escota, o ma miga, o Maria
+
+ Am      F
+Amor d’Aussau,
+   C       G
+Lo temps passat,
+ Am      F
+Amor d’Aussau,
+    C        G
+Que t’ei goardat
+
+          C  G                  C
+Parla per jo a l' ausèth lo mei haut,
+Dm         C    Dm            G
+Que l'as sovent de cap a Pèiralua,
+          E                  Am
+Que'u diseràs que soi hèra malaut,
+F          C   G                C
+Que baishe lèu shens esperar la lua.
+
+Am      F
+Amor d’Aussau,
+   C       G
+Lo temps passat,
+ Am      F
+Amor d’Aussau,
+    C        G
+Que t’ei goardat
+
+         C   G            C
+E l'esparvèr autanlèu arribat,
+Dm         C     Dm              G
+Suu linçou blanc pausarà l' immortèla,
+         E                  Am
+S'emportarà mon amna au bordalat,
+F           C  G                  C
+A l' endret on viscom ue vita tan bèra
+
+Am      F
+Amor d’Aussau,
+   C       G
+Lo temps passat,
+ Am      F
+Amor d’Aussau,
+    C        G
+Que t’ei goardat
+
+Am      F
+Amor d’Aussau,
+   C       G
+Lo temps passat,
+ Am      F
+Amor d’Aussau,
+    C        G
+Que t’ei goardat
+`
 }
 ];
