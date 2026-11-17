@@ -1,6 +1,6 @@
 // Service worker : met l'appli en cache pour qu'elle s'ouvre sans réseau.
 // Les tablatures elles-mêmes sont dans le localStorage de l'appareil.
-const CACHE = 'tablatures-v8';
+const CACHE = 'tablatures-v9';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './songs.js', './icon-180.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

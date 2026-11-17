@@ -65,7 +65,8 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .tr{display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:6px calc(var(--sar) + 10px) 0 calc(var(--sal) + 14px)}
 .tr .ib{background:var(--panel);border:1px solid var(--line);min-width:40px;height:38px}
 .tr b{min-width:30px;text-align:center;font-variant-numeric:tabular-nums}
-.tr .lbl{margin-right:4px}
+.tr .lbl{margin-right:4px;min-width:60px}
+.tr .ib.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .tab{margin:0;padding:12px calc(var(--sar) + 14px) calc(var(--sab) + 140px) calc(var(--sal) + 14px);
   font:var(--fs,14px)/1.35 ui-monospace,"SF Mono",Menlo,monospace;white-space:pre;overflow-x:auto;
   -webkit-overflow-scrolling:touch;tab-size:4}
@@ -122,8 +123,16 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     <button class="ib" id="t-minus" aria-label="Un demi-ton plus bas">−</button>
     <b id="t-val">0</b>
     <button class="ib" id="t-plus" aria-label="Un demi-ton plus haut">+</button>
-    <button class="ib" id="t-capo" style="display:none"></button>
     <button class="ib" id="t-reset" style="display:none">Original</button>
+  </div>
+  <div class="tr" id="s-capo" aria-label="Position du capo">
+    <span class="lbl">Capo</span>
+    <button class="ib chip" data-c="0">Sans</button>
+    <button class="ib chip" data-c="1">1</button>
+    <button class="ib chip" data-c="2">2</button>
+    <button class="ib chip" data-c="3">3</button>
+    <button class="ib chip" data-c="4">4</button>
+    <button class="ib chip" data-c="5">5</button>
   </div>
   <pre class="tab" id="s-tab"></pre>
   <div class="tools">
@@ -252,9 +261,6 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     current = s; show('song');
     $('s-title').textContent = s.title || 'Sans titre';
     $('s-meta').textContent = [s.artist, s.note].filter(Boolean).join(' · ');
-    const cp = capoOf(s);
-    $('t-capo').style.display = cp ? '' : 'none';
-    if (cp) $('t-capo').textContent = 'Sans capo (+' + cp + ')';
     renderTab();
     $('s-tab').style.setProperty('--fs', prefs.fs + 'px');
     $('sc-speed').value = prefs.speed;
@@ -309,10 +315,17 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     $('s-tab').textContent = transpose(current.body || '', st);
     $('t-val').textContent = (st > 0 ? '+' : '') + st;
     $('t-reset').style.display = st ? '' : 'none';
+    // capo joué = capo d'origine − décalage ; on surligne la case correspondante
+    const base = capoOf(current), norm = v => ((v + 6 + 120) % 12) - 6;
+    document.querySelectorAll('#s-capo .chip').forEach(b => {
+      b.classList.toggle('on', norm(base - +b.dataset.c) === st);
+    });
   }
+  document.querySelectorAll('#s-capo .chip').forEach(b => {
+    b.onclick = () => setTr(capoOf(current) - +b.dataset.c);
+  });
   $('t-minus').onclick = () => setTr(trOf(current) - 1);
   $('t-plus').onclick = () => setTr(trOf(current) + 1);
-  $('t-capo').onclick = () => setTr(capoOf(current));
   $('t-reset').onclick = () => setTr(0);
 
   $('s-back').onclick = () => go('#');
