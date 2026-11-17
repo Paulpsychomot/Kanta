@@ -831,7 +831,8 @@ La la la la la li la la la…
   id: 'seed-amor-daussau',
   title: "Amor d'Aussau",
   artist: 'A Vista de Nas',
-  note: 'Accordage standard',
+  note: 'Capo 3',
+  rev: 2,
   body: `C   G                C
 Oei que soi jo, embarrat hens l'ostau,
 Dm        C     Dm           G
