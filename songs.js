@@ -1138,65 +1138,108 @@ E
   title: 'Oihanian',
   artist: 'Botakantu',
   note: 'Accords : F# D A E',
+  rev: 2,
   body: `Accords : F# D A E
-(placement sur les paroles à compléter)
 
-F#  D  A  E
-
+         F#     D
 Oihanian zuiñen eijer
+A           E
 Txorriñobat Khantari
+F#        D
 Eskualdün arbolari
+A     E
 Zazpi probintzier
 
+        F#  D
 Amodioz dio gazter
+          A     E
 Eskuarari bethi exker
+          F#    D
 Jarraikiz aiten ürratxer
+   A       E
 Ez sekülan bazter
 
+   F#   D
 Ez deia Xarmagarri
+        A  E
 Nuri ez dü plazer
+          F#      D
 Txori bat khantan ari
+A         E
 Eskualdün aurhider
 
+   F#   D
 Ez deia Xarmagarri
+        A  E
 Nuri ez dü plazer
+          F#      D
 Txori bat khantan ari
+A         E
 Eskualdün aurhider
 
+     F#    D
 Hots anaie maitiak
+A       E
 Bandera eskietan
+F#          D
 Eskualdünak beikira
+A      E
 Nagusi güzietan
 
+     F#    D
 Hots anaie maitiak
+A       E
 Bandera eskietan
+F#          D
 Eskualdünak beikira
+A      E
 Nagusi güzietan
 
+  F#     D
 O Txoria Hanitxetan
+A         E
 Zurekilan batian
+F#        D
 Boztarioz Khantatzia
+A    E
 Nian desiretan
 
+       F#   D
 Sarthü gira plazeretan
+           A    E
 Egün plaza eder huntan
+      F#       D
 Nahiz boztario ezari
+A      E
 Eskual bihotzetan
 
+     F#    D
 Hots anaie maitiak
+A       E
 Bandera eskietan
+F#          D
 Eskualdünak beikira
+A      E
 Nagusi güzietan
 
+     F#    D
 Hots anaie maitiak
+A       E
 Bandera eskietan
+F#          D
 Eskualdünak beikira
+A      E
 Nagusi güzietan
 
+     F#    D
 Hots anaie maitiak
+A       E
 Bandera eskietan
+F#          D
 Eskualdünak beikira
+A      E
 Nagusi güzietan
+
 `
 }
 ];
