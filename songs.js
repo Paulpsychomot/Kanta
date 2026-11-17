@@ -648,5 +648,183 @@ Tout doucement je la regarde,
         G7               C
 Et je lui dis «  embrasse moi ».
 `
+},
+{
+  id: 'seed-emmenez-moi',
+  title: 'Emmenez-moi',
+  artist: 'Charles Aznavour',
+  note: 'Accordage standard · sans capo · 6/8',
+  body: `[Intro]
+Am E7 Am E7
+
+[Verses]
+          Am                       G
+Vers les docks où le poids et l'ennui
+                Am       E7
+Me courbent le dos
+         Am                G
+Ils arrivent le ventre alourdi de fruits
+        Am   E7   Am
+Les bateaux
+
+F                        G
+Ils viennent du bout du monde
+                F
+Apportant avec eux
+               G
+Des idées vagabondes
+                      F
+Aux reflets de ciel bleu
+      C
+De mirage
+C                       F
+Traînant un parfum poivré
+              C
+De pays inconnus
+                F
+Et d'éternels étés
+                     C
+Où l'on vit presque nu
+           E7
+Sur les plages
+
+         Am                  G
+Moi qui n'ai connu toute ma vie
+                Am        E7
+Que le ciel du Nord
+       Am                     G
+J'aimerais débarbouiller ce gris
+              Am
+En virant de bord
+
+[Chorus]
+Am E7 Am G                  C
+Emmenez-moi au bout de la terre
+          G                 C
+Emmenez-moi au pays des merveilles
+         E7           Am
+Il me semble que la misère
+  F            E7       Am
+Serait moins pénible au soleil
+
+[Verses]
+         Am                   G
+Dans les bars à la tombée du jour
+           Am       E7
+Avec les marins
+          Am                  G
+Quand on parle de filles et d'amour
+               Am   E7   Am
+Un verre à la main
+
+F                       G
+Je perds la notion des choses
+               F
+Et soudain ma pensée
+                G
+M'enlève et me dépose
+                F
+Un merveilleux été
+         C
+Sur la grève
+C                      F
+Où je vois tendant les bras
+                      C
+L'amour qui comme un fou
+                   F
+Court au-devant de moi
+                  C
+Et je me pends au cou
+        E7
+De mon rêve
+
+          Am                       G
+Quand les bars ferment, que les marins
+                 Am       E7
+Rejoignent leur bord
+         Am                   G
+Moi je rêve encor' jusqu'au matin
+               Am
+Debout sur le port
+
+[Chorus]
+Am E7 Am G                  C
+Emmenez-moi au bout de la terre
+         G                  C
+Emmenez-moi au pays des merveilles
+        E7             Am
+Il me semble que la misère
+  F            E7       Am
+Serait moins pénible au soleil
+
+[Verses]
+         Am                     G
+Un beau jour, sur un rafiot craquant
+                Am       E7
+De la coque au pont
+        Am              G
+Pour partir, je travaillerai dans
+              Am   E7   Am
+La soute à charbon
+
+F                     G
+Prenant la route qui mène
+                 F
+A mes rêves d'enfant,
+                  G
+sur des îles lointaines,
+                  F
+Où rien n'est important
+         C
+que de vivre
+C                  F
+Où les filles alanguies
+                    C
+Vous ravissent le coeur
+                       F
+en tressant, m'a-t-on dit,
+                     C
+De ces colliers de fleurs
+      E7
+qui enivrent
+
+      Am                      G
+Je fuirai, laissant là mon passé,
+              Am       E7
+Sans aucun remords
+       Am                  G
+Sans bagage et le coeur libéré,
+                  Am
+En chantant très fort
+
+[Chorus]
+Am E7 Am G                  C
+Emmenez-moi au bout de la terre
+          G                 C
+Emmenez-moi au pays des merveilles
+        E7             Am
+Il me semble que la misère
+  F            E7       Am
+Serait moins pénible au soleil
+
+Am E7 Am G                  C
+Emmenez-moi au bout de la terre
+          G                 C
+Emmenez-moi au pays des merveilles
+          E7             Am
+Il me semble que la misère
+  F            E7       Am
+Serait moins pénible au soleil
+
+[Outro](repeat fading)
+Am       G                  C
+La la la la la li la la la la...
+          G                 C
+La la la la la li la la la la...
+          E7             Am
+La la la la la li la la la...
+  F            E7       Am
+La la la la la li la la la…
+`
 }
 ];
