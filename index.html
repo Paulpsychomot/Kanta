@@ -77,7 +77,7 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .grp{display:flex;align-items:center;gap:4px}
 .tools .ib{background:var(--panel);border:1px solid var(--line)}
 .tools .ib.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.tools input[type=range]{width:90px;accent-color:var(--accent)}
+.tools input[type=range]{width:64px;accent-color:var(--accent)}
 .lbl{font-size:12px;color:var(--muted)}
 
 /* édition */
@@ -139,6 +139,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     <div class="grp">
       <button class="ib" id="f-minus" aria-label="Texte plus petit">A−</button>
       <button class="ib" id="f-plus" aria-label="Texte plus grand">A+</button>
+      <button class="ib on" id="f-fit" aria-label="Ajuster le texte à la largeur de l'écran" title="Ajuster à l'écran">↔</button>
     </div>
     <div class="grp">
       <button class="ib" id="sc-toggle">▶ Défiler</button>
@@ -187,7 +188,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   const load = () => { try { const d = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(d)) return d; } catch (e) {} return null; };
   let songs = load() || [];
   function save() { try { localStorage.setItem(KEY, JSON.stringify(songs)); } catch (e) { alert("Impossible d'enregistrer (stockage plein ?)"); } }
-  let prefs = { fs: 14, speed: 3, theme: 'auto' };
+  let prefs = { fs: 14, speed: 3, theme: 'auto', fit: true };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF)) || {}); } catch (e) {}
   const savePrefs = () => { try { localStorage.setItem(PREF, JSON.stringify(prefs)); } catch (e) {} };
 
@@ -262,7 +263,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     $('s-title').textContent = s.title || 'Sans titre';
     $('s-meta').textContent = [s.artist, s.note].filter(Boolean).join(' · ');
     renderTab();
-    $('s-tab').style.setProperty('--fs', prefs.fs + 'px');
+    applyFs();
     $('sc-speed').value = prefs.speed;
     window.scrollTo(0, 0);
   }
@@ -315,6 +316,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     $('s-tab').textContent = transpose(current.body || '', st);
     $('t-val').textContent = (st > 0 ? '+' : '') + st;
     $('t-reset').style.display = st ? '' : 'none';
+    if (prefs.fit) applyFs();
     // capo joué = capo d'origine − décalage ; on surligne la case correspondante
     const base = capoOf(current), norm = v => ((v + 6 + 120) % 12) - 6;
     document.querySelectorAll('#s-capo .chip').forEach(b => {
@@ -330,9 +332,31 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
 
   $('s-back').onclick = () => go('#');
   $('s-edit').onclick = () => go('#edit/' + current.id);
-  const setFs = d => { prefs.fs = Math.min(30, Math.max(9, prefs.fs + d)); $('s-tab').style.setProperty('--fs', prefs.fs + 'px'); savePrefs(); };
+  /* taille du texte : ajustée automatiquement à la largeur de l'écran */
+  const FIT_MIN = 9, FIT_MAX = 18;
+  let curFs = prefs.fs;
+  function fitFs() {
+    const tab = $('s-tab'), cs = getComputedStyle(tab);
+    const avail = tab.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font:20px ' + cs.fontFamily;
+    probe.textContent = 'M'.repeat(50);
+    document.body.appendChild(probe);
+    const cw = probe.getBoundingClientRect().width / 50 / 20;   // largeur d'un caractère par px de taille
+    probe.remove();
+    const longest = Math.max(1, ...tab.textContent.split('\n').map(l => l.length));
+    return Math.floor(avail / (longest * cw) * 10) / 10;
+  }
+  function applyFs() {
+    curFs = prefs.fit ? Math.min(FIT_MAX, Math.max(FIT_MIN, fitFs())) : prefs.fs;
+    $('s-tab').style.setProperty('--fs', curFs + 'px');
+    $('f-fit').classList.toggle('on', prefs.fit);
+  }
+  const setFs = d => { prefs.fit = false; prefs.fs = Math.min(30, Math.max(7, Math.round(curFs) + d)); applyFs(); savePrefs(); };
   $('f-minus').onclick = () => setFs(-1);
   $('f-plus').onclick = () => setFs(1);
+  $('f-fit').onclick = () => { prefs.fit = !prefs.fit; applyFs(); savePrefs(); };
+  addEventListener('resize', () => { if ($('v-song').classList.contains('on') && prefs.fit) applyFs(); });
 
   /* défilement automatique + écran allumé */
   let raf = 0, acc = 0, last = 0, lock = null;
