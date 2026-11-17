@@ -279,16 +279,18 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     const name = n => (flat ? FLAT : SHARP)[(noteIdx(n) + st + 120) % 12];
     return name(m[1]) + m[2] + (m[3] ? '/' + name(m[3]) : '');
   }
-  const isChordTok = t => CHORD.test(t) || /^x\d+$/i.test(t) || /^[|\/\-–]+$/.test(t);
+  const core = t => t.replace(/\*+$/, '');            // « E* » = accord à gratter une fois
+  const isNC = t => /^N\.?C\.?$/i.test(t);
+  const isChordTok = t => CHORD.test(core(t)) || isNC(t) || /^x\d+$/i.test(t) || /^[|\/\-–]+$/.test(t);
   function isChordLine(l) {
     const t = l.trim().split(/\s+/);
-    return t[0] !== '' && !/^\[/.test(l.trim()) && t.every(isChordTok) && t.some(x => CHORD.test(x));
+    return t[0] !== '' && !/^\[/.test(l.trim()) && t.every(isChordTok) && t.some(x => CHORD.test(core(x)));
   }
   function shiftLine(l, st) {
     const toks = [...l.matchAll(/\S+/g)];
     let out = l.slice(0, toks[0].index);
     toks.forEach((m, i) => {
-      out += CHORD.test(m[0]) ? shiftChord(m[0], st) : m[0];
+      out += CHORD.test(core(m[0])) ? shiftChord(core(m[0]), st) + m[0].slice(core(m[0]).length) : m[0];
       const next = toks[i + 1];
       if (next) out += ' '.repeat(Math.max(1, next.index - out.length));
     });

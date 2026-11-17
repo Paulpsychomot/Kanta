@@ -1010,5 +1010,127 @@ Je te veux si tu veux de moi
 
 (Fade out)
 `
+},
+{
+  id: 'seed-allons-voir',
+  title: 'Allons voir',
+  artist: 'Feu! Chatterton',
+  note: 'Accordage standard · sans capo',
+  body: `N.C. = Sans accord
+* = Gratter une fois
+
+[Intro]
+E* A* E  A
+
+[Verse 1]
+E
+ Quoi que les gens d'ici pensent
+           A
+S'il n'est pas partout la même heure
+            E
+Il y a peut-être une chance
+            A
+Que l'herbe soit plus verte ailleurs
+   E
+Souvent tu attends la nuit
+                        A
+Quand plus rien ne fait mal
+
+Et tu rêves que tu t'enfuis
+                    Am
+À la nage, par le canal
+
+[Pre-Chorus]
+                      E
+Tu rêves d'un grand pays
+
+D'une vie qui enivre
+                   F#
+Comme celle que tu lis
+                   A
+Dans les pages des livres
+                     N.C.
+Il est temps de vivre
+
+[Chorus]
+       E
+Allons voir
+                     A
+Ce que la vie nous réserve
+                     E
+Ce que la vie nous réserve
+                A
+N'ayons peur de rien
+       E
+Allons voir
+                     Am
+Ce que la vie nous réserve
+                     E
+Ce que la vie nous réserve
+                A
+N'ayons peur de rien
+N.C.
+Prends-moi la main
+
+[Solo]
+E  A         E         A
+  (Woo hoo) (Woo hoo) (Woo hoo)
+
+[Verse 2]
+E*
+  Tu meurs d'envie d'aller voir
+        A*
+Par toi-même, faire tes preuves
+      E*
+Et si c'était la mer à boire
+         A*
+Eh bien, que la mer t'abreuve
+   E
+Le ciel sera toujours bas
+
+À ceux qui vivent sans courage
+A
+ Tu ne les écoute pas
+                                      Am
+Quand ils disent "ce n'est pas de ton âge"
+
+[Pre-Chorus]
+                    E
+Et tu vas vers ce pays
+
+Vers cette vie qui enivre
+                   F#
+Comme celle que tu lis
+                           A
+Le soir dans les pages des livres
+   N.C.
+Il est temps de vivre
+
+[Chorus]
+       E
+Allons voir
+                     A
+Ce que la vie nous réserve
+                     E
+Ce que la vie nous réserve
+                A
+N'ayons peur de rien
+       E
+Allons voir
+                     Am
+Ce que la vie nous réserve
+                     E
+Ce que la vie nous réserve
+                A
+N'ayons peur de rien
+N.C.
+Prends-moi la main
+
+[Outro]
+E  A         E         A
+  (Woo hoo) (Woo hoo) (Woo hoo)
+E  A  E  A
+E
+`
 }
 ];
