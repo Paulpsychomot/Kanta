@@ -530,5 +530,123 @@ Je t'aimais, je t'aime et je t'aimerai....
 [Outro fade-out]
 | G | G | D | D |
 `
+},
+{
+  id: 'seed-mon-dieu-aise',
+  title: "Mon Dieu que j'en suis à mon aise",
+  artist: 'Nadau',
+  note: 'Capo 4',
+  body: `Motif simple (arpèges très simples) :
+C G G7 C
+F C G C
+F C G7 C
+
+
+      C                G
+Mon Dieu que j’en suis à mon aise
+     G7            C
+Quand ma mie est auprès de moi,
+          F            C
+Tout doucement je la regarde,
+       G             C
+Et je lui dis «  embrasse moi ».
+          F            C
+Tout doucement je la regarde,
+               G7              C
+Et je lui dis «  embrasse moi ».
+
+
+     C               G
+Comment veux tu que je t’embrasse,
+       G7             C
+Tout le monde dit mal de toi,
+      F                C
+On dit que tu pars pour l’armée,
+        G               C
+Dans  le Piémont servir le roi.
+      F                C
+On dit que tu pars pour l’armée,
+        G7                    C
+Dans  le Piémont servir le roi.
+
+        C               G
+Quand tu seras dans ces campagnes,
+       G7             C
+Tu n’y penseras plus à moi,
+      F                C
+Tu penseras aux Italiennes,
+        G               C
+Qui sont bien plus belles que moi.
+      F                C
+Tu penseras aux Italiennes,
+        G7               C
+Qui sont bien plus belles que moi.
+
+        C               G
+Si fait, si fait, si fait ma belle,
+       G7             C
+J’y penserai toujours à toi,
+      F                C
+Je m’en ferai faire une image,
+        G               C
+Toute à la semblance de toi.
+      F                C
+Je m’en ferai faire une image,
+        G7               C
+Toute à la semblance de toi.
+
+        C               G
+Quand je serai à table à boire,
+       G7             C
+A tous mes amis je dirai :
+      F                C
+« Chers camarades, venez voir,
+        G               C
+Celle que mon cœur a tant aimé. »
+      F                C
+« Chers camarades, venez voir,
+        G7               C
+Celle que mon cœur a tant aimé. »
+
+
+        C               G
+Je l’ai z’aimée, je l’aime encore,
+       G7             C
+Je l’aimerai tant que je vivrai,
+      F                C
+Je l’aimerai quand j’serai mort,
+        G               C
+Si c’est permis aux trépassés.
+      F                C
+Je l’aimerai quand j’serai mort,
+        G7               C
+Si c’est permis aux trépassés.
+
+        C               G
+Alors j’ai versé tant de larmes,
+       G7             C
+Que trois moulins en ont tourné,
+      F                C
+Petits ruisseaux, grandes rivières,
+        G               C
+Pendant trois jours ont débordé.
+      F                C
+Petits ruisseaux, grandes rivières,
+        G7               C
+Pendant trois jours ont débordé.
+
+        C               G
+Mon Dieu que j’en suis à mon aise
+       G7             C
+Quand ma mie est auprès de moi,
+      F                C
+Tout doucement je la regarde,
+        G               C
+Et je lui dis «  embrasse moi ».
+      F                C
+Tout doucement je la regarde,
+        G7               C
+Et je lui dis «  embrasse moi ».
+`
 }
 ];
