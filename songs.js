@@ -542,6 +542,8 @@ Je t'aimais, je t'aime et je t'aimerai....
   title: "Mon Dieu que j'en suis à mon aise",
   artist: 'Nadau',
   note: 'Capo 4',
+  cat: 'bo',
+  rev: 2,
   body: `Motif simple (arpèges très simples) :
 C G G7 C
 F C G C
