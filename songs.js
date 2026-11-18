@@ -1307,7 +1307,8 @@ G  Em  Bm  D7 (x2)
 {
   id: 'sb-angel',
   title: "Angel",
-  artist: "",
+  artist: "Robbie Williams",
+  rev: 2,
   note: "Capo 3",
   body: `Angel
 
@@ -3699,7 +3700,8 @@ Elle a mal et tu ne reviendras pas
 {
   id: 'sb-cielo-ciego',
   title: "Cielo ciego",
-  artist: "",
+  artist: "Boulevard des Airs",
+  rev: 2,
   note: "",
   body: `Cielo ciego
 
@@ -4368,7 +4370,8 @@ Mais je sais qu'on est quelques milliards à chercher l'amour
 {
   id: 'sb-san-clemente',
   title: "San Clemente",
-  artist: "",
+  artist: "Boulevard des Airs",
+  rev: 2,
   note: "",
   body: `San Clemente
 
