@@ -7,6 +7,8 @@ window.SEED = [
   title: 'Eperra',
   artist: 'Traditionnel basque',
   note: 'Accordage standard · sans capo',
+  cat: 'bo',
+  rev: 2,
   body: `[Verse 1]
  G               C            G
 Eperrak badituzü bere bi hegalak
@@ -87,6 +89,8 @@ Printzerik ez ahal da orai zuenganako
   title: 'Lau teilatu',
   artist: '',
   note: 'Accordage standard · sans capo',
+  cat: 'bo',
+  rev: 2,
   body: `[Intro]
 D D A A Em G D D    x2
 
@@ -209,6 +213,8 @@ edozein herriko jaixetan.
   title: 'Azken Dantza',
   artist: '',
   note: 'Accordage standard · sans capo',
+  cat: 'bo',
+  rev: 2,
   body: `A D A E A  A D A E A
 Oh oh oh ...
 
@@ -832,7 +838,8 @@ La la la la la li la la la…
   title: "Amor d'Aussau",
   artist: 'A Vista de Nas',
   note: 'Capo 3',
-  rev: 2,
+  cat: 'bo',
+  rev: 3,
   body: `C   G                C
 Oei que soi jo, embarrat hens l'ostau,
 Dm        C     Dm           G
@@ -1138,7 +1145,8 @@ E
   title: 'Oihanian',
   artist: 'Botakantu',
   note: 'Accords : F# D A E',
-  rev: 2,
+  cat: 'bo',
+  rev: 3,
   body: `Accords : F# D A E
 
          F#     D
@@ -1657,6 +1665,8 @@ We're up all night to get lucky
   title: "Hegoak (Txoria txori)",
   artist: "Johnny Kelly & Maite Itoiz",
   note: "Capo 1",
+  cat: 'bo',
+  rev: 2,
   body: `Txoria Txori- Interpret: Johnny Kelly& Maite Itoiz  - Capo 1st fret
 
 Em       D   Em

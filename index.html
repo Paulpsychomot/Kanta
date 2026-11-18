@@ -48,6 +48,11 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .search{padding:10px calc(var(--sar) + 12px) 4px calc(var(--sal) + 12px)}
 .search input{width:100%;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);padding:0 14px;outline:none}
 .search input:focus{border-color:var(--accent)}
+.chips{display:flex;gap:8px;padding:8px calc(var(--sar) + 12px) 2px calc(var(--sal) + 12px);overflow-x:auto}
+.chips button{flex:none;height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--line);background:var(--panel);font-size:15px;font-weight:600;color:var(--muted)}
+.chips button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.form .chk{display:flex;align-items:center;gap:10px;color:var(--text);font-size:17px}
+.form .chk input{width:22px;height:22px;accent-color:var(--accent);padding:0}
 .list{list-style:none;margin:0;padding:6px calc(var(--sar) + 12px) calc(var(--sab) + 90px) calc(var(--sal) + 12px)}
 .list li{margin:8px 0}
 .list a{display:block;padding:14px 16px;border-radius:14px;background:var(--panel);border:1px solid var(--line);color:inherit;text-decoration:none}
@@ -106,6 +111,10 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   </div>
   <div class="offline" id="offline">Hors ligne — tes tablatures restent disponibles.</div>
   <div class="search"><input id="q" type="search" placeholder="Rechercher un titre ou un artiste" autocomplete="off" autocapitalize="off"></div>
+  <div class="chips" id="chips">
+    <button data-f="all">Tout</button>
+    <button data-f="bo">Basque / occitan</button>
+  </div>
   <ul class="list" id="list"></ul>
   <button class="fab" id="btn-new">+ Ajouter</button>
 </section>
@@ -158,6 +167,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   <div class="form">
     <label>Titre<input id="e-title" autocomplete="off" placeholder="Wonderwall"></label>
     <label>Artiste<input id="e-artist" autocomplete="off" placeholder="Oasis"></label>
+    <label class="chk"><input type="checkbox" id="e-bo"> Section « Basque / occitan »</label>
     <label>Note (capo, accordage…)<input id="e-note" autocomplete="off" placeholder="Capo 2"></label>
     <label>Tablature / accords
       <textarea id="e-body" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off"
@@ -188,7 +198,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   const load = () => { try { const d = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(d)) return d; } catch (e) {} return null; };
   let songs = load() || [];
   function save() { try { localStorage.setItem(KEY, JSON.stringify(songs)); } catch (e) { alert("Impossible d'enregistrer (stockage plein ?)"); } }
-  let prefs = { fs: 14, speed: 3, theme: 'auto', fit: true };
+  let prefs = { fs: 14, speed: 3, theme: 'auto', fit: true, filter: 'all' };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF)) || {}); } catch (e) {}
   const savePrefs = () => { try { localStorage.setItem(PREF, JSON.stringify(prefs)); } catch (e) {} };
 
@@ -236,7 +246,9 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   const norm = s => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   function renderList() {
     const q = norm($('q').value.trim());
-    const items = songs.filter(s => !q || norm(s.title + ' ' + s.artist).includes(q))
+    document.querySelectorAll('#chips button').forEach(b => b.classList.toggle('on', b.dataset.f === prefs.filter));
+    const items = songs.filter(s => prefs.filter === 'all' || s.cat === prefs.filter)
+      .filter(s => !q || norm(s.title + ' ' + s.artist).includes(q))
       .sort((a, b) => norm(a.title).localeCompare(norm(b.title)));
     const ul = $('list'); ul.textContent = '';
     if (!items.length) {
@@ -255,6 +267,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     }
   }
   $('q').addEventListener('input', renderList);
+  document.querySelectorAll('#chips button').forEach(b => b.onclick = () => { prefs.filter = b.dataset.f; savePrefs(); renderList(); });
   $('btn-new').onclick = () => go('#edit');
 
   /* ---------- chanson ---------- */
@@ -392,6 +405,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     $('e-title').value = s ? s.title : '';
     $('e-artist').value = s ? s.artist : '';
     $('e-note').value = s ? s.note : '';
+    $('e-bo').checked = s ? s.cat === 'bo' : prefs.filter === 'bo';
     $('e-body').value = s ? s.body : '';
     $('e-del').style.display = s ? '' : 'none';
     window.scrollTo(0, 0);
@@ -400,7 +414,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   $('e-save').onclick = () => {
     const title = $('e-title').value.trim();
     if (!title) { $('e-title').focus(); return; }
-    const data = { title, artist: $('e-artist').value.trim(), note: $('e-note').value.trim(), body: $('e-body').value.replace(/\r\n?/g, '\n') };
+    const data = { cat: $('e-bo').checked ? 'bo' : '', title, artist: $('e-artist').value.trim(), note: $('e-note').value.trim(), body: $('e-body').value.replace(/\r\n?/g, '\n') };
     if (editing) Object.assign(editing, data); else { editing = { id: uid(), ...data }; songs.push(editing); }
     save(); location.replace('#song/' + editing.id);
   };
@@ -433,7 +447,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
       for (const x of d) {
         if (!x || typeof x.body !== 'string') continue;
         const ex = songs.find(s => s.id === x.id);
-        const rec = { id: x.id || uid(), title: String(x.title || 'Sans titre'), artist: String(x.artist || ''), note: String(x.note || ''), body: x.body };
+        const rec = { id: x.id || uid(), title: String(x.title || 'Sans titre'), artist: String(x.artist || ''), note: String(x.note || ''), cat: x.cat === 'bo' ? 'bo' : '', body: x.body };
         if (ex) Object.assign(ex, rec); else songs.push(rec); n++;
       }
       save(); menu.close(); renderList(); alert(n + ' tablature(s) importée(s).');
