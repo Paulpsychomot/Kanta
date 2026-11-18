@@ -1307,8 +1307,8 @@ G  Em  Bm  D7 (x2)
 {
   id: 'sb-angel',
   title: "Angel",
-  artist: "Robbie Williams",
-  rev: 2,
+  artist: "Jack Johnson",
+  rev: 3,
   note: "Capo 3",
   body: `Angel
 
