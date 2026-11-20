@@ -1146,106 +1146,106 @@ E
   id: 'seed-oihanian',
   title: 'Oihanian',
   artist: 'Botakantu',
-  note: 'Accords : F# D A E',
+  note: 'Accords : F#m D A E',
   cat: 'bo',
-  rev: 3,
-  body: `Accords : F# D A E
+  rev: 4,
+  body: `Accords : F#m D A E
 
-         F#     D
+         F#m    D
 Oihanian zuiñen eijer
 A           E
 Txorriñobat Khantari
-F#        D
+F#m       D
 Eskualdün arbolari
 A     E
 Zazpi probintzier
 
-        F#  D
+        F#m D
 Amodioz dio gazter
           A     E
 Eskuarari bethi exker
-          F#    D
+          F#m   D
 Jarraikiz aiten ürratxer
    A       E
 Ez sekülan bazter
 
-   F#   D
+   F#m  D
 Ez deia Xarmagarri
         A  E
 Nuri ez dü plazer
-          F#      D
+          F#m     D
 Txori bat khantan ari
 A         E
 Eskualdün aurhider
 
-   F#   D
+   F#m  D
 Ez deia Xarmagarri
         A  E
 Nuri ez dü plazer
-          F#      D
+          F#m     D
 Txori bat khantan ari
 A         E
 Eskualdün aurhider
 
-     F#    D
+     F#m   D
 Hots anaie maitiak
 A       E
 Bandera eskietan
-F#          D
+F#m         D
 Eskualdünak beikira
 A      E
 Nagusi güzietan
 
-     F#    D
+     F#m   D
 Hots anaie maitiak
 A       E
 Bandera eskietan
-F#          D
+F#m         D
 Eskualdünak beikira
 A      E
 Nagusi güzietan
 
-  F#     D
+  F#m    D
 O Txoria Hanitxetan
 A         E
 Zurekilan batian
-F#        D
+F#m       D
 Boztarioz Khantatzia
 A    E
 Nian desiretan
 
-       F#   D
+       F#m  D
 Sarthü gira plazeretan
            A    E
 Egün plaza eder huntan
-      F#       D
+      F#m      D
 Nahiz boztario ezari
 A      E
 Eskual bihotzetan
 
-     F#    D
+     F#m   D
 Hots anaie maitiak
 A       E
 Bandera eskietan
-F#          D
+F#m         D
 Eskualdünak beikira
 A      E
 Nagusi güzietan
 
-     F#    D
+     F#m   D
 Hots anaie maitiak
 A       E
 Bandera eskietan
-F#          D
+F#m         D
 Eskualdünak beikira
 A      E
 Nagusi güzietan
 
-     F#    D
+     F#m   D
 Hots anaie maitiak
 A       E
 Bandera eskietan
-F#          D
+F#m         D
 Eskualdünak beikira
 A      E
 Nagusi güzietan

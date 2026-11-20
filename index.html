@@ -72,6 +72,12 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .tr b{min-width:30px;text-align:center;font-variant-numeric:tabular-nums}
 .tr .lbl{margin-right:4px;min-width:60px}
 .tr .ib.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.ch{color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px;cursor:pointer}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;padding:6px}
+.cd{text-align:center;font-weight:650}
+.cd svg,.cbig svg{width:100%;height:auto;display:block;color:var(--text)}
+.cbig{width:60%;margin:8px auto 0;text-align:center;font-weight:650;font-size:22px}
+.cap{font-size:13px;color:var(--muted);font-weight:400;padding:2px 8px}
 .tab{margin:0;padding:12px calc(var(--sar) + 14px) calc(var(--sab) + 140px) calc(var(--sal) + 14px);
   font:var(--fs,14px)/1.35 ui-monospace,"SF Mono",Menlo,monospace;white-space:pre;overflow-x:auto;
   -webkit-overflow-scrolling:touch;tab-size:4}
@@ -142,6 +148,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     <button class="ib chip" data-c="3">3</button>
     <button class="ib chip" data-c="4">4</button>
     <button class="ib chip" data-c="5">5</button>
+    <button class="ib" id="t-chords" style="margin-left:6px">Accords</button>
   </div>
   <pre class="tab" id="s-tab"></pre>
   <div class="tools">
@@ -185,6 +192,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   <small id="m-info"></small>
   <button id="m-close">Fermer</button>
 </dialog>
+<dialog id="chdlg"><div id="ch-body"></div><button id="ch-close">Fermer</button></dialog>
 <input type="file" id="file" accept="application/json,.json" hidden>
 
 <script src="songs.js"></script>
@@ -313,6 +321,87 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     if (!st) return body;
     return body.split('\n').map(l => isChordLine(l) ? shiftLine(l, st) : l).join('\n');
   }
+  /* ---------- diagrammes d'accords ---------- */
+  const OPEN = {
+    C: [-1,3,2,0,1,0], C7: [-1,3,2,3,1,0], Cmaj7: [-1,3,2,0,0,0], Cadd9: [-1,3,2,0,3,0],
+    D: [-1,-1,0,2,3,2], Dm: [-1,-1,0,2,3,1], D7: [-1,-1,0,2,1,2], Dm7: [-1,-1,0,2,1,1], Dmaj7: [-1,-1,0,2,2,2],
+    Dsus2: [-1,-1,0,2,3,0], Dsus4: [-1,-1,0,2,3,3],
+    G: [3,2,0,0,0,3], G7: [3,2,0,0,0,1], Gmaj7: [3,2,0,0,0,2],
+    Emadd9: [0,2,2,0,0,2], B7: [-1,2,1,2,0,2], Fmaj7: [-1,-1,3,2,1,0],
+    'C/B': [-1,2,2,0,1,0], 'G/B': [-1,2,0,0,3,3], 'D/F#': [2,-1,0,2,3,2], 'A/E': [0,0,2,2,2,0],
+    'Am/G': [3,0,2,2,1,0], 'Am/F#': [2,0,2,2,1,0], 'Am/E': [0,0,2,2,1,0], 'C/G': [3,3,2,0,1,0],
+    'G/F#': [2,-1,0,0,0,3], 'Em/B': [-1,2,2,0,0,0], 'F/C': [-1,3,3,2,1,1]
+  };
+  const BAR_E = { '': [0,2,2,1,0,0], m: [0,2,2,0,0,0], '7': [0,2,0,1,0,0], m7: [0,2,0,0,0,0], maj7: [0,2,1,1,0,0], sus4: [0,2,2,2,0,0], '5': [0,2,2,-1,-1,-1] };
+  const BAR_A = { '': [-1,0,2,2,2,0], m: [-1,0,2,2,1,0], '7': [-1,0,2,0,2,0], m7: [-1,0,2,0,1,0], maj7: [-1,0,2,1,2,0],
+                  sus2: [-1,0,2,2,0,0], sus4: [-1,0,2,2,3,0], '5': [-1,0,2,2,-1,-1], '6': [-1,0,2,2,2,2], dim: [-1,0,1,2,1,-1] };
+  const normQ = q => ({ M7: 'maj7', M: '', maj: '', min: 'm', '-': 'm', sus: 'sus4', add2: 'add9', '+': 'aug' })[q] ?? q;
+  function baseShape(root, q) {
+    const key = root + q;
+    if (OPEN[key]) return { frets: OPEN[key], barre: false };
+    const c = [];
+    if (BAR_E[q]) c.push({ f: (noteIdx(root) - 4 + 12) % 12, s: BAR_E[q] });
+    if (BAR_A[q]) c.push({ f: (noteIdx(root) - 9 + 12) % 12, s: BAR_A[q] });
+    if (!c.length) return null;
+    c.sort((x, y) => x.f - y.f);
+    return { frets: c[0].s.map(x => x < 0 ? x : x + c[0].f), barre: c[0].f > 0 };
+  }
+  function chordShape(name) {
+    const m = CHORD.exec(name); if (!m) return null;
+    const q = normQ(m[2]);
+    if (m[3] && OPEN[m[1] + q + '/' + m[3]]) return { frets: OPEN[m[1] + q + '/' + m[3]], barre: false };
+    const sh = baseShape(m[1], q); if (!sh) return null;
+    return { frets: sh.frets, barre: sh.barre, bass: m[3] || '' };
+  }
+  function chordSvg(fr, useBarre) {
+    const pos = fr.filter(x => x > 0), maxF = pos.length ? Math.max(...pos) : 0, minF = pos.length ? Math.min(...pos) : 1;
+    const start = maxF <= 5 ? 1 : minF, X = i => 18 + i * 13, Y = j => 30 + j * 17;
+    let g = '';
+    for (let i = 0; i < 6; i++) g += '<line x1="' + X(i) + '" y1="' + Y(0) + '" x2="' + X(i) + '" y2="' + Y(5) + '" stroke="currentColor" stroke-width="1"/>';
+    for (let j = 0; j <= 5; j++) g += '<line x1="' + X(0) + '" y1="' + Y(j) + '" x2="' + X(5) + '" y2="' + Y(j) + '" stroke="currentColor" stroke-width="' + (j === 0 && start === 1 ? 3 : 1) + '"/>';
+    const strs = fr.map((f, i) => f === minF ? i : -1).filter(i => i >= 0);
+    const isBar = useBarre && minF > 0 && strs.length >= 2 && !fr.slice(strs[0], strs[strs.length - 1] + 1).some(f => f <= 0);
+    if (isBar) {
+      const y = Y(minF - start + 0.5);
+      g += '<rect x="' + (X(strs[0]) - 5) + '" y="' + (y - 5) + '" width="' + (X(strs[strs.length - 1]) - X(strs[0]) + 10) + '" height="10" rx="5" fill="currentColor"/>';
+    } else {
+      fr.forEach((f, i) => { if (f > 0) g += '<circle cx="' + X(i) + '" cy="' + Y(f - start + 0.5) + '" r="5.5" fill="currentColor"/>'; });
+    }
+    if (isBar) {
+      fr.forEach((f, i) => { if (f > minF) g += '<circle cx="' + X(i) + '" cy="' + Y(f - start + 0.5) + '" r="5.5" fill="currentColor"/>'; });
+    }
+    fr.forEach((f, i) => {
+      if (f === 0) g += '<circle cx="' + X(i) + '" cy="20" r="3.5" fill="none" stroke="currentColor" stroke-width="1.2"/>';
+      if (f < 0) g += '<path d="M' + (X(i) - 3.5) + ' 16.5L' + (X(i) + 3.5) + ' 23.5M' + (X(i) + 3.5) + ' 16.5L' + (X(i) - 3.5) + ' 23.5" stroke="currentColor" stroke-width="1.2"/>';
+    });
+    if (start > 1) g += '<text x="2" y="' + (Y(0) + 12) + '" font-size="10" fill="currentColor">' + start + '</text>';
+    return '<svg viewBox="0 0 100 120" role="img" aria-label="Diagramme d\'accord">' + g + '</svg>';
+  }
+  const esc = x => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  function chordCard(name, big) {
+    const sh = chordShape(name);
+    const cap = sh && sh.bass ? '<div class="cap">avec la basse ' + esc(sh.bass) + '</div>' : '';
+    return '<div class="' + (big ? 'cbig' : 'cd') + '">' + esc(name) + (sh ? chordSvg(sh.frets, sh.barre) + cap : '<div class="cap">Pas de schéma</div>') + '</div>';
+  }
+  function tabHtml(text) {
+    return text.split('\n').map(l => isChordLine(l)
+      ? l.replace(/\S+/g, tok => CHORD.test(core(tok)) ? '<span class="ch" data-c="' + esc(core(tok)) + '">' + esc(tok) + '</span>' : esc(tok))
+      : esc(l)).join('\n');
+  }
+  const chdlg = $('chdlg');
+  $('s-tab').addEventListener('click', e => {
+    const c = e.target.closest && e.target.closest('.ch'); if (!c) return;
+    $('ch-body').innerHTML = chordCard(c.dataset.c, true); chdlg.showModal();
+  });
+  $('t-chords').onclick = () => {
+    const seen = [];
+    $('s-tab').querySelectorAll('.ch').forEach(c => { if (!seen.includes(c.dataset.c)) seen.push(c.dataset.c); });
+    $('ch-body').innerHTML = seen.length ? '<div class="cap" style="padding:8px">Accords de la chanson (avec la tonalité ou le capo choisis)</div><div class="cgrid">' + seen.map(n => chordCard(n)).join('') + '</div>' : '<div class="cap" style="padding:16px">Aucun accord reconnu dans cette chanson.</div>';
+    chdlg.showModal();
+  };
+  $('ch-close').onclick = () => chdlg.close();
+  chdlg.addEventListener('click', e => { if (e.target === chdlg) chdlg.close(); });
+
   const ROMAN = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8, IX: 9, X: 10 };
   function capoOf(s) {
     const m = /capo\s*:?\s*(\d+|[IVX]+)\b/i.exec(s.note || '');
@@ -328,7 +417,7 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
   }
   function renderTab() {
     const st = trOf(current);
-    $('s-tab').textContent = transpose(current.body || '', st);
+    $('s-tab').innerHTML = tabHtml(transpose(current.body || '', st));
     $('t-val').textContent = (st > 0 ? '+' : '') + st;
     $('t-reset').style.display = st ? '' : 'none';
     if (prefs.fit) applyFs();
