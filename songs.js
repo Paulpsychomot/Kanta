@@ -4283,43 +4283,87 @@ E-----------------2-2-2-2--
   id: 'sb-comme-elle-vient',
   title: "Comme elle vient",
   artist: "Noir Désir",
-  note: "",
-  body: `Noir Désir – Comme elle vient
-Em : 779977  /   C : 335533  /  G : 355433  /  D : 557755
+  note: "Accordage standard · sans capo",
+  rev: 2,
+  body: `Noir Désir - Comme Elle Vient
 
-A jouer exclusivement en barré:
-couplet et refrain: Em / C / G / D
-Ca change a un moment : Em / Bm / C / G/A
+Album : 666667 Club (1996)
+Tempo : 120
 
-( Em / C / G / D )
-A SE CHANGER EN ROI, A HURLER A LA LUNE
-A TRAQUER LA FORTUNE, TOUT CA POUR TRAINER SON POIDS
-AU RISQUE DE S'Y PLAIRE, AU MOMENT DE S'Y CROIRE
-SONNEZ LES COURANTS D'AIR, FAITES DONNER L'EXUTOIRE
-IL FAUDRAIT QU'ON S'ELEVE, AU FOND IL A D'LA CLASSE
-OU ALORS QU'ON PRENNE LA SEVE
-COMME ELLE VIENT, ENCORE ET ENCORE
-COMME ELLE VIENT, ENCORE ET ENCORE
-TU VOIS LA BELLE BLEUE, DES FEUX DE L'ARTIFICE
-ET TU LA SENS MEME UN PEU MIEUX, A LA FAVEUR D'UNE ECLIPSE
-ON VOIT DU JOUR AU LENDEMAIN, QUE CA NE S'INVENTE PAS
-INSTANTANEMENT COMME CA, REPRENDRE DE VOLEE D'AUSSI LOIN
-COMME ELLE VIENT, ENCORE ET ENCORE
-COMME ELLE VIENT, ENCORE ET ENCORE
-( Em / Bm / C / G/A )
-COMME ELLE VIENT, COMME ON PEUT
-C'EST CRUEL ET SANS FARD, CA CHOISI PAS, MERCI POUR EUX
-COMME UNE FLECHE, COMME UN PIEUX
-C'EST BON POUR LA MEMOIRE, CA VOUS FAIT QUOI D'ETRE AU MILIEU?
-( Em / C / G / D )
-HE CAMARADE, SI LES JEUX SONT FAITS
-AU SON DES MASCARADES, ON POURRA TOUJOURS SE MARRER
-ET TOUT LE LONG DES COURANTS D'AIR, ON VOIT DES AMOUREUX
-QUI SAVENT ENCORE CHANGER LEURS NERFS, ET UN BOUQUET DELICIEUX
-ON EN AURA DES SAISONS, DES TORRIDES ET DES BLEMES
-JE PEUX ENCORE GARDER TON NOM, JE PEUX AUSSI DIRE QUE JE L'AIME.
-COMME ELLE VIENT, ENCORE ET ENCORE
-COMME ELLE VIENT, ENCORE ET ENCORE
+Tout les accords peuvent être joués en cinquième : Em=E5, G=G5 etc ....
+
+[Intro]
+A5/E (x77xxx)
+E5 C5 G5 C5 D5
+
+[Couplet 1]
+                Em                 C
+A se changer en Roi, à hurler à la lune
+                 G                            D
+A traquer la fortune tout ça pour trainer son poids
+                 Em                       C
+Au risque de s'y plaire, au moment de s'y croire
+                    G                         D
+Sonnez les courants d'air, faites donner l'exutoire
+                     Em                      C
+Il faudrait qu'on s'élève, au fond il a d'la classe
+                         G      D
+Ou alors qu'on prenne la sè.....ve
+
+[refrain 1]
+           Em        C   G              D
+Comme elle vient            encore et encore
+           Em        C   G              D
+Comme elle vient            encore et encore
+
+[Couplet 2]
+                    Em                       C
+Tu la vois la belle bleue, des feux de l'artifice
+                          G                           D
+Et tu la sens même un peu mieux à la faveur d'une éclipse
+                        Em                        C
+On voit du jour au lendemain, que ça ne s'invente pas
+                     G                              D
+Instantanément comme ça, reprendre de volée d'aussi loin
+
+[refrain 2]
+           Em        C   G              D
+Comme elle vient            encore et encore
+           Em        C   G              D
+Comme elle vient            encore et encore
+
+[Pont]
+          Em               Bm
+Comme elle vient, comme on peut
+         C                           G               A
+C'est cruel et sans fard, Ça choisit pas, merci pour eux
+          Em               Bm
+Comme une flèche, comme un pieux
+      C                                 G                 A
+C'est bon pour la mémoire, ça vous fait quoi d'être au milieu ?
+
+[Couplet 3]
+       Em                     C
+Hé camarade, si les jeux sont faits
+                G                              D
+Au son des mascarades on pourra toujours se marrer
+                             Em                     C
+Et tout le long des courants d'air, on voit des amoureux
+                                G                        D
+Qui savent encore changer leurs nerfs, en un bouquet délicieux
+                       Em                  C
+On en aura des saisons des torrides et des blêmes
+                          G                              D
+Je peux encore garder ton nom, je peux aussi dire que je l'aime
+
+[refrain 2]
+           Em        C   G              D
+Comme elle vient            encore et encore
+           Em        C   G              D
+Comme elle vient            encore et encore
+
+[Outro]
+Em
 `
 },
 {
