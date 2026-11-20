@@ -1666,10 +1666,25 @@ We're up all night to get lucky
   id: 'sb-hegoak',
   title: "Hegoak (Txoria txori)",
   artist: "Johnny Kelly & Maite Itoiz",
-  note: "Capo 1",
+  note: "Sans capo",
   cat: 'bo',
-  rev: 3,
+  rev: 4,
   body: `Em           G           D         Em
+Hegoak ebaki banizkio, neria izango zen
+       D            Em
+Ez zuen aldegingo
+Em           G           D         Em
+Hegoak ebaki banizkio, neria izango zen
+       D            Em
+Ez zuen aldegingo
+Em       G        Em      G         D
+Baina, honela, ez zen gehiago txoria izango
+Em       G        Em      G         D
+Baina, honela, ez zen gehiago txoria izango
+Em     D     Em       Em    G       D     Em
+Eta nik... txoria nuen maite, eta nik txoria nuen maite
+
+Em           G           D         Em
 Hegoak ebaki banizkio, neria izango zen
        D            Em
 Ez zuen aldegingo
