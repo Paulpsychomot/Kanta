@@ -4283,87 +4283,87 @@ E-----------------2-2-2-2--
   id: 'sb-comme-elle-vient',
   title: "Comme elle vient",
   artist: "Noir Désir",
-  note: "Accordage standard · sans capo",
-  rev: 2,
+  note: "Capo 3",
+  rev: 3,
   body: `Noir Désir - Comme Elle Vient
 
 Album : 666667 Club (1996)
 Tempo : 120
 
-Tout les accords peuvent être joués en cinquième : Em=E5, G=G5 etc ....
+Tout les accords peuvent être joués en cinquième : Am=A5, C=C5 etc ....
 
 [Intro]
-A5/E (x77xxx)
-E5 C5 G5 C5 D5
+D5/A
+A5 F5 C5 F5 G5
 
 [Couplet 1]
-                Em                 C
+                Am                 F
 A se changer en Roi, à hurler à la lune
-                 G                            D
+                 C                            G
 A traquer la fortune tout ça pour trainer son poids
-                 Em                       C
+                 Am                       F
 Au risque de s'y plaire, au moment de s'y croire
-                    G                         D
+                    C                         G
 Sonnez les courants d'air, faites donner l'exutoire
-                     Em                      C
+                     Am                      F
 Il faudrait qu'on s'élève, au fond il a d'la classe
-                         G      D
+                         C      G
 Ou alors qu'on prenne la sè.....ve
 
 [refrain 1]
-           Em        C   G              D
+           Am        F   C              G
 Comme elle vient            encore et encore
-           Em        C   G              D
+           Am        F   C              G
 Comme elle vient            encore et encore
 
 [Couplet 2]
-                    Em                       C
+                    Am                       F
 Tu la vois la belle bleue, des feux de l'artifice
-                          G                           D
+                          C                           G
 Et tu la sens même un peu mieux à la faveur d'une éclipse
-                        Em                        C
+                        Am                        F
 On voit du jour au lendemain, que ça ne s'invente pas
-                     G                              D
+                     C                              G
 Instantanément comme ça, reprendre de volée d'aussi loin
 
 [refrain 2]
-           Em        C   G              D
+           Am        F   C              G
 Comme elle vient            encore et encore
-           Em        C   G              D
+           Am        F   C              G
 Comme elle vient            encore et encore
 
 [Pont]
-          Em               Bm
+          Am               Em
 Comme elle vient, comme on peut
-         C                           G               A
+         F                           C               D
 C'est cruel et sans fard, Ça choisit pas, merci pour eux
-          Em               Bm
+          Am               Em
 Comme une flèche, comme un pieux
-      C                                 G                 A
+      F                                 C                 D
 C'est bon pour la mémoire, ça vous fait quoi d'être au milieu ?
 
 [Couplet 3]
-       Em                     C
+       Am                     F
 Hé camarade, si les jeux sont faits
-                G                              D
+                C                              G
 Au son des mascarades on pourra toujours se marrer
-                             Em                     C
+                             Am                     F
 Et tout le long des courants d'air, on voit des amoureux
-                                G                        D
+                                C                        G
 Qui savent encore changer leurs nerfs, en un bouquet délicieux
-                       Em                  C
+                       Am                  F
 On en aura des saisons des torrides et des blêmes
-                          G                              D
+                          C                              G
 Je peux encore garder ton nom, je peux aussi dire que je l'aime
 
 [refrain 2]
-           Em        C   G              D
+           Am        F   C              G
 Comme elle vient            encore et encore
-           Em        C   G              D
+           Am        F   C              G
 Comme elle vient            encore et encore
 
 [Outro]
-Em
+Am
 `
 },
 {
