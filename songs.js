@@ -1668,64 +1668,21 @@ We're up all night to get lucky
   artist: "Johnny Kelly & Maite Itoiz",
   note: "Capo 1",
   cat: 'bo',
-  rev: 2,
-  body: `Txoria Txori- Interpret: Johnny Kelly& Maite Itoiz  - Capo 1st fret
-
-Em       D   Em
-Hegoak ebaki banizkio
- D       Em
-Neria izango zen
-  D       Em
+  rev: 3,
+  body: `Em           G           D         Em
+Hegoak ebaki banizkio, neria izango zen
+       D            Em
 Ez zuen aldegingo
-
-Em       D   Em
-Hegoak ebaki banizkio
- D       Em
-Neria izango zen
-  D       Em
+Em           G           D         Em
+Hegoak ebaki banizkio, neria izango zen
+       D            Em
 Ez zuen aldegingo
-
-G       D
-Baina, honela
- Em          G    D
-Ez zen gehiago txoria izango
-G       D
-Baina, honela
- Em          G    D
-Ez zen gehiago txoria izango
-
-  Em        D       Em
-Eta nik...txoria nuen maite
-  Em        D       Em
-Eta nik...txoria nuen maite
-
-Em       D   Em
-Hegoak ebaki banizkio
- D       Em
-Neria izango zen
-  D       Em
-Ez zuen aldegingo
-
-Em       D   Em
-Hegoak ebaki banizkio
- D       Em
-Neria izango zen
-  D       Em
-Ez zuen aldegingo
-
-G       D
-Baina, honela
- Em          G    D
-Ez zen gehiago txoria izango
-G       D
-Baina, honela
- Em          G    D
-Ez zen gehiago txoria izango
-
-  Em        D       Em
-Eta nik...txoria nuen maite
-  Em        D       Em
-Eta nik...txoria nuen maite
+Em       G        Em      G         D
+Baina, honela, ez zen gehiago txoria izango
+Em       G        Em      G         D
+Baina, honela, ez zen gehiago txoria izango
+Em     D     Em       Em    G       D     Em
+Eta nik... txoria nuen maite, eta nik txoria nuen maite
 `
 },
 {
