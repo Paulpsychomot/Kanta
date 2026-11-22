@@ -464,11 +464,10 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
 
   /* défilement automatique + écran allumé */
   let raf = 0, acc = 0, last = 0, lock = null;
-  async function wake(on) {
-    try {
-      if (on && 'wakeLock' in navigator) lock = await navigator.wakeLock.request('screen');
-      else if (lock) { await lock.release(); lock = null; }
-    } catch (e) {}
+  // L'écran reste allumé tant que l'appli est ouverte (verrou redemandé à chaque retour / toucher).
+  async function keepAwake() {
+    if (!('wakeLock' in navigator) || document.hidden || (lock && !lock.released)) return;
+    try { lock = await navigator.wakeLock.request('screen'); } catch (e) {}
   }
   function tick(t) {
     const dt = Math.min(64, t - last); last = t;
@@ -478,13 +477,15 @@ dialog small{display:block;color:var(--muted);padding:6px 14px 10px;font-size:13
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) return stopScroll();
     raf = requestAnimationFrame(tick);
   }
-  function startScroll() { $('sc-toggle').classList.add('on'); $('sc-toggle').textContent = '❚❚ Pause'; last = performance.now(); acc = 0; raf = requestAnimationFrame(tick); wake(true); }
-  function stopScroll() { cancelAnimationFrame(raf); raf = 0; $('sc-toggle').classList.remove('on'); $('sc-toggle').textContent = '▶ Défiler'; wake(false); }
+  function startScroll() { $('sc-toggle').classList.add('on'); $('sc-toggle').textContent = '❚❚ Pause'; last = performance.now(); acc = 0; raf = requestAnimationFrame(tick); }
+  function stopScroll() { cancelAnimationFrame(raf); raf = 0; $('sc-toggle').classList.remove('on'); $('sc-toggle').textContent = '▶ Défiler'; }
   $('sc-toggle').onclick = () => raf ? stopScroll() : startScroll();
   $('sc-speed').oninput = e => { prefs.speed = +e.target.value; savePrefs(); };
   // un toucher sur la tab met le défilement en pause
   $('s-tab').addEventListener('touchstart', () => { if (raf) stopScroll(); }, { passive: true });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) stopScroll(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopScroll(); else keepAwake(); });
+  document.addEventListener('pointerdown', keepAwake, { passive: true });
+  keepAwake();
 
   /* ---------- édition ---------- */
   let editing = null;
