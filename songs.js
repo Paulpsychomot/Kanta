@@ -4492,5 +4492,115 @@ Elle m’a trouvé bien futile
 Mais quand bouger l’a faite tourner
 Ma réalité m’a pardonné
 `
+},
+{
+  id: 'seed-zazpiak',
+  title: 'Zazpiak Oihal Batetik',
+  artist: 'Egungoak',
+  note: 'Accordage standard · sans capo · 3/4',
+  cat: 'bo',
+  body: `[Intro]
+G G F C F C G G G F C F G C C
+
+[Verse 1]
+   C           Dm
+Mundu guztiak aditutzen du
+   Em              G
+Euskaldunaren negarra
+   C           Dm
+Alde batera nahiago nuke
+     Em         G    C
+Ez banintz hemengotarra.
+
+[Chorus 1]
+  G            F      C
+Enpeinatzea ez bada libre,
+   F       C       G
+Alferrik dugu indarra.
+    G            F      C
+Hau da txoria gari tartean
+    F        G    C
+Goseak egon beharra.
+
+[Verse 2]
+   C                Dm
+Antzerki huntan lau pertsonaia
+   Em            G
+Ta jokalari bakarra
+  C             Dm
+Arbolak berak erakusten du
+     Em    G    C
+Hostoa eta adarra.
+
+[Chorus 2]
+  G            F      C
+Enpeinatzea ez bada libre,
+   F       C       G
+Alferrik dugu indarra.
+    G            F      C
+Hau da txoria gari tartean
+    F        G    C
+Goseak egon beharra.
+
+[Verse 3]
+   C               Dm
+Sutan pizturik darrai oraindik
+   Em                 G
+Sugai berriz lengo gerra
+ C            Dm
+Oharkabean ez zen mintzatu
+      Em    G     C
+Txirrita poeta zarra
+
+[Chorus 3]
+  G            F      C
+Enpeinatzea ez bada libre,
+   F       C       G
+Alferrik dugu indarra.
+    G            F      C
+Hau da txoria gari tartean
+    F        G    C
+Goseak egon beharra.
+
+[Verse 4]
+   C                Dm
+Zazpi ahizparen gai den oihala
+ Em            G
+Ebakirikan erditik
+  C           Dm
+Alde batera hiru soineko
+    Em        G    C
+Utzirikan lau besterik.
+
+[Chorus 4]
+  G            F      C
+Guraiziakin bereizi arren
+  F        C      G
+Bakoitza bere aldetik
+ G               F      C
+Ezagutzen da jantzi girela
+   F          G   C
+Zazpiak oihal batetik.
+
+[Verse 5]
+  C             Dm
+Oihal bera da gure jantzia
+   Em              G
+Sortu gintuzten unetik,
+   C            Dm
+Ez du munduak kemenik sortu
+      Em      G    C
+Kentzeko gure soinetik.
+
+[Chorus 5]
+  G            F      C
+Guraiziakin bereizi arren
+  F        C      G
+Bakoitza bere aldetik
+ G               F      C
+Ezagutzen da jantzi girela
+   F          G   C
+Zazpiak oihal batetik.
+`
 }
 ];
